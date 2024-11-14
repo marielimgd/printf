@@ -1,0 +1,1 @@
+ft_printf is a custom implementation of the C library function printf, designed to reproduce its core functionality. This project is part of the 42 São Paulo curriculum, aimed at developing a deeper understanding of variadic functions, memory management, and formatted output in C. 
