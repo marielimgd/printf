@@ -6,11 +6,11 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 16:42:13 by mmariano          #+#    #+#             */
-/*   Updated: 2024/11/14 18:04:47 by mmariano         ###   ########.fr       */
+/*   Updated: 2024/11/18 15:58:42 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
+#include "ft_printf.h"
 #include "libft/libft.h"
 
 int	ft_putnbr_hex(unsigned int num, int fd)
@@ -36,7 +36,7 @@ int	ft_format(char type, va_list args)
 		count += ft_putchar_fd(va_arg(args, int), 1);
 	else if (type == 's')
 		count += ft_putstr_fd(va_arg(args, char *), 1);
-	else if (type == 'd')
+	else if (type == 'd' || type == 'i')
 		count += ft_putnbr_fd(va_arg(args, int), 1);
 	else if (type == 'x')
 		count += ft_putnbr_hex(va_arg(args, unsigned int), 1);
