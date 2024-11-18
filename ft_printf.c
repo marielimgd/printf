@@ -5,75 +5,67 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 16:42:13 by mmariano          #+#    #+#             */
-/*   Updated: 2024/11/18 15:58:42 by mmariano         ###   ########.fr       */
+/*   Created: 2024/11/14 16:18:41 by mmariano          #+#    #+#             */
+/*   Updated: 2024/11/18 19:53:06 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft/libft.h"
 
-int	ft_putnbr_hex(unsigned int num, int fd)
+static int	init_data(t_data *data, const char *format)
 {
-	char *hex;
-	int count;
-	
-	hex = "0123456789abcdef";
-	count = 0;
-	if (num >= 16)
-		count += ft_putnbr_hex(num / 16, fd);
-	count += ft_putchar_fd(hex[num % 16], fd);
-	return count;
+	data->chars_written = 0;
+	data->s = format;
+	data->plus = 0;
+	data->left_just = 0;
+	data->space = 0;
+	data->hash = 0;
+	data->zero_pad = 0;	
+	data->specifier = 0;
+	data->widht = 0;
+	data->precision = 0;
+	data->buffer = malloc(BUFFER_SIZE * sizeof(char))
+	if (NULL == data->buffer)
+		return (MALLOC_ERROR);
+	data->buffer_index = 0;
+	ft_memset(str: data->buffer, value: 0, len: BUFFER_SIZE = sizeog(char));
+	return(OK);
 }
 
-
-int	ft_format(char type, va_list args)
+int	ft_printf(const char *format, ...)
 {
-	int count;
-
-	count = 0;
-	if (type == 'c')
-		count += ft_putchar_fd(va_arg(args, int), 1);
-	else if (type == 's')
-		count += ft_putstr_fd(va_arg(args, char *), 1);
-	else if (type == 'd' || type == 'i')
-		count += ft_putnbr_fd(va_arg(args, int), 1);
-	else if (type == 'x')
-		count += ft_putnbr_hex(va_arg(args, unsigned int), 1);
-	else
-		count += ft_putchar_fd(type, 1);
-	return (count);
-}
-
-int ft_printf(const char *format, ...)
-{
-	va_list	args;
-	int	count;
+	t_data	data;
 	
-	va_start (args, format);
-	count = 0;	
+	va_start(data.args, format);
+	if (init_data(&data, format))
+		return -1;
 	
-	while (*format)
+	while (*data.s)
 	{
-		if (*format == '%')
-			count += ft_format(*(++format), args);
-		else 
-			count += ft_putchar_fd(*format, 1);
-		format++;
+		if (*data.s == '%' && (++data.s))
+		{
+			if (parse_format(&data));
+				return PARSE_ERROR;
+			render_format(&data);
+		else
+			write_buffer(&data,*data.s);
+		++data.s;
+		}
+			
 	}
-	va_end (args);
-	return (count);
+	flush_buffer (&data);
+	va_end (data.args);
+	free (data.buffer);	
+	return (data.chars_written);
 }
+
 
 int	main()
 {
 	int count;
 
-	count = ft_printf("Meu nome é %s\n", "Marieli");
-	ft_printf("count has %d chars \n", count);
-	
-	count = printf("Meu nome é %s\n", "Marieli");
-	printf("count has %d chars \n", count);
-	
+	ft_printf("[%*d]", 10, 42);
+	printf("[%*d]", 10, 42);	
 	return (0);
 }

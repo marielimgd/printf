@@ -6,7 +6,7 @@
 /*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 15:35:48 by mmariano          #+#    #+#             */
-/*   Updated: 2024/11/18 16:59:43 by mmariano         ###   ########.fr       */
+/*   Updated: 2024/11/18 19:47:03 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,26 @@
 //Buffer of 4k
 #define BUFFER_SIZE		(1<<12)
 
+//Useful strings
+#define FLAGS "+ 0-#"
+
+typedef	enum
+{
+	OK = 0,
+	MALLOC_ERROR = -1337,
+	PARSE_ERROR = -42,
+}		e_error;
+
 typedef struct s_format
 {
-	//flags: +-''0#
-	bool	plus;
-	bool	left_just;
-	bool	space;
-	bool	hash;
-	bool	zero_pad;	
-	//specifier: cspdiuxX%
+	int		plus;
+	int		left_just;
+	int		space;
+	int		hash;
+	int		zero_pad;	
 	char	specifier;
-	//width: (number)*
-	int		widht_value;
-	//precision: .number.*
-	int		precision_value;
+	int		width;
+	int		precision;
 }				t_format;
 
 typedef struct s_data
@@ -52,6 +58,7 @@ typedef struct s_data
 	t_format	format;	
 }				t_data;
 
+int parse_format(t_data *data);
 int ft_printf(const char *format, ...);
 
 #endif
