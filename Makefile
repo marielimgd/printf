@@ -6,25 +6,25 @@
 #    By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/13 16:48:47 by mmariano          #+#    #+#              #
-#    Updated: 2024/11/14 17:06:01 by mmariano         ###   ########.fr        #
+#    Updated: 2024/11/20 17:55:05 by mmariano         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ft_printf.a
-CC = gcc
+NAME = libftprintf.a
+CC = clang
 CFLAGS = -Wall -Wextra -Werror
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 SRCS = ft_printf.c
 OBJS = $(SRCS:.c=.o)
 
-all: $(LIBFT) $(NAME)
+all: $(NAME)
 
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT)
+	$(AR) rcs $(NAME) $(OBJS) $(LIBFT)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
