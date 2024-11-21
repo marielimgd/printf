@@ -1,0 +1,1 @@
+This is the first project in 42's core curriculum: a custom C library of essential functions, built to support future projects.
