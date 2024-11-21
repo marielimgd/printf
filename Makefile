@@ -3,48 +3,35 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: marielidias <marielidias@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/13 16:48:47 by mmariano          #+#    #+#              #
-#    Updated: 2024/11/20 19:39:05 by mmariano         ###   ########.fr        #
+#    Updated: 2024/11/21 20:12:14 by marielidias      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
-CC = clang
 CFLAGS = -Wall -Wextra -Werror
-LDFLAGS = -lm
 AR = ar rcs
-LIBFT_DIR = libft
-LIBFT = $(LIBFT_DIR)/libft.a
-SRCS = ft_printf.c
-OBJS = $(SRCS:.c=.o)
+SRC = ft_printf \
+	ft_putchar \
+	ft_putstr \
+	ft_putnbr 
 
-# Rule to build the object files from source files
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+SRCS = $(addsuffix .c, $(SRC))
+OBJS = $(addsuffix .o, $(SRC))
 
-# Rule to build libft (must be done before building libftprintf.a)
-$(LIBFT):
-	@$(MAKE) -C $(LIBFT_DIR)
+$(NAME): $(OBJS)
+	ar rcs $@ $^
 
-# Rule to build the final static library (libftprintf.a)
-$(NAME): $(OBJS) $(LIBFT)
-	$(AR) $(NAME) $(OBJS) $(LIBFT)
-
-# Default target is 'all', which depends on $(NAME)
 all: $(NAME)
 
-# Rule to remove object files
 clean:
-	rm -f $(OBJS)
+	rm -f *.o
 
-# Rule to remove both object files and the final static library
 fclean: clean
 	rm -f $(NAME)
-	@$(MAKE) -C $(LIBFT_DIR) fclean
 
-# Rule to clean and then rebuild everything from scratch
-re: fclean all
+re: clean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus

@@ -1,29 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marielidias <marielidias@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/29 15:02:47 by marielidias       #+#    #+#             */
-/*   Updated: 2024/11/06 11:29:49 by marielidias      ###   ########.fr       */
+/*   Created: 2024/11/01 12:17:31 by marielidias       #+#    #+#             */
+/*   Updated: 2024/11/21 20:26:23 by marielidias      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-int	ft_strncmp(const char *str1, const char *str2, size_t n)
+int	ft_putchar(char c)
 {
-	size_t	index;
-
-	index = 0;
-	if (n == 0)
-		return (0);
-	while ((index < n) && (str1[index] || str2[index]))
-	{
-		if ((unsigned char)str1[index] != (unsigned char)str2[index])
-			return ((unsigned char)str1[index] - (unsigned char)str2[index]);
-		index++;
-	}
-	return (0);
+	write(1, &c, 1);
+	return (1);
 }

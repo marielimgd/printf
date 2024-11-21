@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: marielidias <marielidias@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/01 12:26:01 by marielidias       #+#    #+#             */
-/*   Updated: 2024/11/07 16:14:13 by mmariano         ###   ########.fr       */
+/*   Created: 2024/11/01 12:19:45 by marielidias       #+#    #+#             */
+/*   Updated: 2024/11/21 20:29:01 by marielidias      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	ft_putnbr_fd(int n, int fd)
+int	ft_putstr(char *str)
 {
-	long	num;
+	int	index;
 
-	if (fd < 0)
-		return ;
-	num = n;
-	if (num < 0)
+	if (!str)
+		return (ft_putstr("(null)"));
+	index = 0;
+	while (str[index])
 	{
-		ft_putchar_fd('-', fd);
-		num = num * -1;
+		write(1, &str[index], 1);
+		index++;
 	}
-	if (num > 9)
-		ft_putnbr_fd((num / 10), fd);
-	ft_putchar_fd('0' + (num % 10), fd);
+	return (index);
 }
