@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marielidias <marielidias@student.42.fr>    +#+  +:+       +#+        */
+/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 12:26:01 by marielidias       #+#    #+#             */
-/*   Updated: 2024/11/21 20:28:12 by marielidias      ###   ########.fr       */
+/*   Updated: 2024/11/22 16:16:32 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_putnbr_u(unsigned int n)
 	int	count;
 
 	count = 0;
-	if (n >= 10)
+	if (n > 9)
 		count += ft_putnbr_u(n / 10);
 	count += ft_putchar('0' + (n % 10));
 	return (count);

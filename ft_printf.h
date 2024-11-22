@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marielidias <marielidias@student.42.fr>    +#+  +:+       +#+        */
+/*   By: mmariano <mmariano@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 15:35:48 by mmariano          #+#    #+#             */
-/*   Updated: 2024/11/21 20:26:20 by marielidias      ###   ########.fr       */
+/*   Updated: 2024/11/22 16:16:58 by mmariano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
